@@ -13,5 +13,10 @@ namespace MyEshop.Controllers
         {
             return View();
         }
+
+        public ActionResult Slider()
+        {
+            return PartialView();
+        }
     }
 }
