@@ -95,6 +95,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-rtl.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\carousel.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\yekannumbers.svg" />
+    <Content Include="Content\fonts\yekanweb.svg" />
+    <Content Include="Content\img\1.jpg" />
+    <Content Include="Content\img\2.jpg" />
+    <Content Include="Content\img\avatar.jpg" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\img.jpg" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\phone.png" />
+    <Content Include="Content\img\shop.png" />
+    <Content Include="Content\img\slider.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\carousel.js" />
+    <Content Include="Content\js\jquery-v1.11.3.js" />
+    <Content Include="Content\js\modernizr.js" />
+    <Content Include="Content\js\owl.carousel.js" />
+    <Content Include="Content\js\script.js" />
+    <Content Include="Content\js\wow.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -107,6 +132,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\yekannumbers.eot" />
+    <Content Include="Content\fonts\yekannumbers.ttf" />
+    <Content Include="Content\fonts\yekannumbers.woff" />
+    <Content Include="Content\fonts\yekanweb.eot" />
+    <Content Include="Content\fonts\yekanweb.ttf" />
+    <Content Include="Content\fonts\yekanweb.woff" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
