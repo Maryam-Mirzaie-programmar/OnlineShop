@@ -116,6 +116,8 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\carousel.js" />
     <Content Include="Content\js\jquery-v1.11.3.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\js\modernizr.js" />
     <Content Include="Content\js\owl.carousel.js" />
     <Content Include="Content\js\script.js" />
@@ -145,11 +147,20 @@
     <Content Include="Content\fonts\yekanweb.eot" />
     <Content Include="Content\fonts\yekanweb.ttf" />
     <Content Include="Content\fonts\yekanweb.woff" />
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Slider.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,7 +171,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Datalayer\Datalayer.csproj">
