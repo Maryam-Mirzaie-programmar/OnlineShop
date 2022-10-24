@@ -92,7 +92,7 @@
     </nav>
     <!-- End Mega Menu -->
     <!-- slider -->
-    @RenderSection("slider" , false)
+    @RenderSection("slider", false)
     <!-- End slider -->
 
     <div class="container margin-top-25">
@@ -191,6 +191,8 @@
             <!-- End Category -->
         </aside>
         <div class="col-md-9 col-sm-8 left-side-content">
+
+            @RenderBody()
 
 
             <section class="last-products">
@@ -481,7 +483,10 @@
     <script src="/Content/js/bootstrap.min.js"></script>
     <script src="/Content/js/owl.carousel.js"></script>
     <script src="/Content/js/script.js"></script>
+    <script src="~/Content/js/jquery.validate.min.js"></script>
+    <script src="~/Content/js/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
 
-@RenderBody()
+
+
