@@ -168,6 +168,7 @@
     <Content Include="Views\ManageEmails\ActivationEmail.cshtml" />
     <Content Include="Views\Account\ActiveUser.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_LoggedInUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
