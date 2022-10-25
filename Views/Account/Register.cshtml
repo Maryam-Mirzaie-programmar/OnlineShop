@@ -9,7 +9,7 @@
     <header><h3> ایجاد حساب کاربری </h3></header>
     <article>
         <div class="col-md-10 col-sm-10 col-xs-12">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Register","Account",FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
@@ -59,3 +59,8 @@
         <div class="clearfix"></div>
     </article>
 </section>
+
+
+@{ 
+    //To Do : Add Captcha to form
+}

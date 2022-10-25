@@ -12,6 +12,7 @@ namespace MyEshop.Controllers
     {
         OnlineShopDBEntities db = new OnlineShopDBEntities();
 
+        [Route("Register")]
         public ActionResult Register()
         {
             return View();
@@ -19,6 +20,7 @@ namespace MyEshop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Register")]
         public ActionResult Register(RegisterViewModel register)
         {
             if (ModelState.IsValid)
@@ -38,9 +40,19 @@ namespace MyEshop.Controllers
                     db.SaveChanges();
                     var user = db.Users.Single(u => u.Email == register.Email.Trim());
 
-                    // ToDo: Send Activation Email to User
-
-                    return View("SuccessRegister" , user);
+                    // Send Activation Email to User
+                    try
+                    {
+                        var body = PartialToStringClass.RenderPartialView("ManageEmails", "ActivationEmail", user);
+                        SendEmail.Send(user.Email, "ایمیل فعالسازی", body);
+                        return View("SuccessRegister", user);
+                    }
+                    catch
+                    {
+                        db.Users.Remove(user);
+                        db.SaveChanges();
+                        ModelState.AddModelError("Email", "متاسفانه در ارسال ایمیل فعالسازی خطایی رخ داده است.");
+                    }    
                 }
                 else
                 {
@@ -48,6 +60,11 @@ namespace MyEshop.Controllers
                 }
             }
             return View(register);
+        }
+
+        public ActionResult ActiveUser()
+        {
+            return View();
         }
 
         public ActionResult Login()
