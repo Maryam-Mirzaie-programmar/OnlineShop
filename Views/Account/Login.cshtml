@@ -1,0 +1,63 @@
+﻿@model Datalayer.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<section class="border-radius">
+    <header><h3> ورود به سایت </h3></header>
+    <article>
+        <div class="">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.RememberMe)
+                                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="text-center">
+                            <input type="submit" value="ورود به سایت" class="btn btn-primary btn-block " />
+                        </div>
+                    </div>
+                </div>
+            }
+            <hr />
+            <div class="text-center">
+                <p><a href=""><i class="fa fa-lock"> </i>رمز عبور خود را فراموش کرده ام  </a></p>
+
+                <p><a href=""><i class="fa fa-user-plus"> </i>  ثبت نام کنید! </a></p>
+            </div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </article>
+</section>

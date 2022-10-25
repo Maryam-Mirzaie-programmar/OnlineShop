@@ -82,9 +82,42 @@ namespace MyEshop.Controllers
             return View();
         }
 
+        [Route("Login")]
         public ActionResult Login()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("Login")]
+        public ActionResult Login(LoginViewModel login ,string ReturnUrl = "/")
+        {
+            if (ModelState.IsValid)
+            {
+                string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "MD5");
+                var user = db.Users.SingleOrDefault(u => u.Email == login.Email.Trim().ToLower() && u.Password == hashPassword);
+                if (user == null || !user.IsActive)
+                {
+                    ModelState.AddModelError("Email", "کاربری با این مشخصات یافت نشد");
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(user.Username, login.RememberMe);
+                    return Redirect(ReturnUrl);
+                }
+            }
+
+            return View(login);
+        }
+
+
+
+        public ActionResult Signout()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/");
         }
     }
 }
