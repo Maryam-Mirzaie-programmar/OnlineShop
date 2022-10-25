@@ -25,13 +25,13 @@ namespace MyEshop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (! db.Users.Any(u => u.Email == register.Email.Trim().ToLower()))
+                if (!db.Users.Any(u => u.Email == register.Email.Trim().ToLower()))
                 {
                     db.Users.Add(new Datalayer.User()
                     {
                         RoleId = 1,
                         Username = register.Username,
-                        Password = FormsAuthentication.HashPasswordForStoringInConfigFile(register.Password , "MD5"),
+                        Password = FormsAuthentication.HashPasswordForStoringInConfigFile(register.Password, "MD5"),
                         Email = register.Email.Trim().ToLower(),
                         ActrivationCode = Guid.NewGuid().ToString(),
                         IsActive = false,
@@ -52,7 +52,7 @@ namespace MyEshop.Controllers
                         db.Users.Remove(user);
                         db.SaveChanges();
                         ModelState.AddModelError("Email", "متاسفانه در ارسال ایمیل فعالسازی خطایی رخ داده است.");
-                    }    
+                    }
                 }
                 else
                 {
@@ -62,8 +62,23 @@ namespace MyEshop.Controllers
             return View(register);
         }
 
-        public ActionResult ActiveUser()
+        public ActionResult ActiveUser(string id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            var user = db.Users.SingleOrDefault(u => u.ActrivationCode == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            user.IsActive = true;
+            user.ActrivationCode = Guid.NewGuid().ToString();
+            db.SaveChanges();
+
+            ViewBag.name = user.Username;
             return View();
         }
 
