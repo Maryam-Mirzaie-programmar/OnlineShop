@@ -79,4 +79,29 @@ namespace Datalayer
         [Compare("Password", ErrorMessage = "لطفا رمز عبور را در این فیلد تکرار نمایید")]
         public string RePassword { get; set; }
     }
+
+
+    public class ChangePasswordViewModel
+    {
+        [Display(Name = "رمز عبور فعلی")]
+        [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
+        [MaxLength(100)]
+        [DataType(DataType.Password)]
+        public string OldPassword { get; set; }
+        
+
+        [Display(Name = "رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
+        [MaxLength(100)]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+
+        [Display(Name = "تکرار رمز عبور جدید")]
+        [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
+        [MaxLength(100)]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "لطفا رمز عبور را در این فیلد تکرار نمایید")]
+        public string RePassword { get; set; }
+    }
 }
