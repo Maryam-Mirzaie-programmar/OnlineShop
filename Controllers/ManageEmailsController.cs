@@ -12,5 +12,10 @@ namespace MyEshop.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult ResetPassword()
+        {
+            return PartialView();
+        }
     }
 }

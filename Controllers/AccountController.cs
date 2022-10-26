@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Datalayer;
 using System.Web.Security;
+using System.Data.Entity;
 
 namespace MyEshop.Controllers
 {
@@ -51,7 +52,7 @@ namespace MyEshop.Controllers
                     {
                         db.Users.Remove(user);
                         db.SaveChanges();
-                        ModelState.AddModelError("Email", "متاسفانه در ارسال ایمیل فعالسازی خطایی رخ داده است.");
+                        ModelState.AddModelError("Email", "متاسفانه در ارسال ایمیل  خطایی رخ داده است.");
                     }
                 }
                 else
@@ -113,6 +114,86 @@ namespace MyEshop.Controllers
         }
 
 
+
+        [Route("ForgetPassword")]
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("ForgetPassword")]
+        public ActionResult ForgetPassword(ForgetPasswordViewModel forget)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = db.Users.SingleOrDefault(u => u.Email == forget.Email.Trim().ToLower());
+                if(user != null && user.IsActive)
+                {
+                    // Send Reset Password Link Email to User
+                    try
+                    {
+                        var body = PartialToStringClass.RenderPartialView("ManageEmails", "ResetPassword",user);
+                        SendEmail.Send(user.Email, "بازیابی کلمه عبور", body);
+                        return View("SuccessForgetPassword" , user);
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("Email", "متاسفانه در ارسال ایمیل  خطایی رخ داده است.");
+                    }
+                }
+                ModelState.AddModelError("Email", "حساب فعالی با این ایمیل یافت نشد");
+            }
+            return View(forget);
+        }
+
+
+        public ActionResult ResetPassword(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            var user = db.Users.SingleOrDefault(u => u.ActrivationCode == id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordViewModel reset, string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                }
+                var user = db.Users.SingleOrDefault(u => u.ActrivationCode == id);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(reset.Password, "MD5");
+                user.Password = hashPassword;
+                user.ActrivationCode = Guid.NewGuid().ToString();
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                if (User.Identity.IsAuthenticated)
+                {
+                    FormsAuthentication.SignOut(); 
+                }
+                return RedirectToAction("Login",new { ResetPassword  = true});
+            }
+            
+            return View(reset);
+        }
 
         public ActionResult Signout()
         {
