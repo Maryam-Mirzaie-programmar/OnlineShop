@@ -2,7 +2,13 @@
 @if (User.Identity.IsAuthenticated)
 {
     <li><a href="/UserPanel/Home/Index"><i class="fa fa-user"></i> <label>@User.Identity.Name</label> </a></li>
+
+    if (User.IsInRole("admin"))
+    {
+        <li><a href="/Admin/Home/Index"><i class="fa fa-tasks"></i> <label>پنل مدیریت</label> </a></li>
+    }
     <li class="text-danger"><a href="/Account/Signout"><i class="fa fa-sign-out"></i> <label>خروج</label> </a></li>
+
 }
 else
 {

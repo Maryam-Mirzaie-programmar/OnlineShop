@@ -24,7 +24,6 @@ namespace Datalayer
         [Display(Name = "رمز عبور")]
         [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
         [MaxLength(100)]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "ایمیل")]
@@ -34,7 +33,7 @@ namespace Datalayer
         public string Email { get; set; }
 
         [Display(Name = "کد فعالسازی")]
-        [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
+        //[Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
         [MaxLength(50)]
         public string ActrivationCode { get; set; }
 

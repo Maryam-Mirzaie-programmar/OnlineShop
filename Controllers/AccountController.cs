@@ -46,6 +46,10 @@ namespace MyEshop.Controllers
                     {
                         var body = PartialToStringClass.RenderPartialView("ManageEmails", "ActivationEmail", user);
                         SendEmail.Send(user.Email, "ایمیل فعالسازی", body);
+                        if(User.Identity.IsAuthenticated)
+                        {
+                            FormsAuthentication.SignOut();
+                        }
                         return View("SuccessRegister", user);
                     }
                     catch
