@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Datalayer.Product_Groups>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupTitle)
+        </th>
+        <th>
+            زیر گروه ها
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(g => g.ParentId == null))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupTitle)
+            </td>
+            <td>
+                @if (Model.Any(g => g.ParentId == item.GroupId))
+                {
+                    <ul>
+                        @foreach (var subgroup in Model.Where(g => g.ParentId == item.GroupId))
+                        {
+                            <li>
+                                @subgroup.GroupTitle
+                                <a class="text-warning" onclick="Edit(@subgroup.GroupId)"><i class="fa fa-edit"></i></a> |
+                                <a class="text-danger" onclick="Delete(@subgroup.GroupId)"><i class="fa fa-trash"></i></a> 
+                            </li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td>
+                <a class="btn btn-sm btn-primary" onclick="Create(@item.GroupId)"><i class="fa fa-plus"></i></a> |
+                <a class="tbtn btn-sm btn-warning" onclick="Edit(@item.GroupId)"><i class="fa fa-edit"></i> </a> |
+                <a class="tbtn btn-sm btn-danger" onclick="Delete(@item.GroupId)"><i class="fa fa-trash"></i> </a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,70 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>لیست گروه ها</h4>
+
+<p>
+    <a onclick="Create(0)" class="btn btn-success">افزودن گروه جدید </a>
+</p>
+<div id="showListGroups">
+
+    @Html.Action("ListGroups")
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="groupsModal" tabindex="-1" role="dialog" aria-labelledby="groupsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="groupsModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="groupsModalBody">
+                <div id="errors"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+        <script>
+
+
+            function Create(id) {
+                $.get("/Admin/Product_Groups/Create?parentId=" + id , function (result) {
+                    $("#groupsModalLabel").html("افزودن گروه جدید");
+                    $("#groupsModalBody").html(result);
+                    $("#groupsModal").modal();
+                });
+            }
+
+            function successAjax() {
+                $("#groupsModal").modal('hide');
+            }
+
+            function Edit(id) {
+                $.get("/Admin/Product_Groups/Edit/" + id, function (result) {
+                    $("#groupsModalLabel").html("ویرایش گروه ");
+                    $("#groupsModalBody").html(result);
+                    $("#groupsModal").modal();
+                });
+            }
+
+
+            function Delete(id) {
+                $.get("/Admin/Product_Groups/Delete/" + id, function (result) {
+                    $("#groupsModalLabel").html("حذف گروه ");
+                    $("#groupsModalBody").html(result);
+                    $("#groupsModal").modal();
+                });
+            }
+
+
+        </script>
+    }

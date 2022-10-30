@@ -1,0 +1,33 @@
+﻿@model Datalayer.Product_Groups
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>مشاهده جزییات</h4>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_Groups2.GroupTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_Groups2.GroupTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ویرایش", "Edit", new { id = Model.GroupId }, new { @class="btn btn-sm btn-warning" }) |
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</p>

@@ -1,0 +1,23 @@
+﻿@model Datalayer.Product_Groups
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div>
+        <p>آیا از حذف گروه @Html.DisplayFor(model => model.GroupTitle) مطمئن هستید؟</p>
+
+        @using (Ajax.BeginForm("Delete", "Product_Groups" , FormMethod.Post , new AjaxOptions
+        {
+            OnSuccess = "successAjax",
+            UpdateTargetId = "showListGroups"
+        }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="حذف" class="btn btn-danger" />
+            </div>
+        }
+</div>

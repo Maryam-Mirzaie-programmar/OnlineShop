@@ -116,6 +116,7 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\carousel.js" />
     <Content Include="Content\js\jquery-v1.11.3.js" />
+    <Content Include="Content\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\js\modernizr.js" />
@@ -130,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Product_GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserPanel\Controllers\AccountController.cs" />
     <Compile Include="Areas\UserPanel\Controllers\HomeController.cs" />
@@ -182,6 +184,12 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Product_Groups\ListGroups.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
