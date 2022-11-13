@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Datalayer.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>لیست</h4>
+
+<p>
+    @Html.ActionLink("افزودن آیتم جدید", "Create", null , new {@class="btn btn-success"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductShortDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductImageName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCreateDate)
+        </td>
+        <td>
+            @Html.ActionLink("ویرایش", "Edit", new { id=item.ProductID } , new { @class="btn btn-sm btn-warning" }) |
+            @Html.ActionLink("مشاهده", "Details", new { id=item.ProductID } , new { @class="btn btn-sm btn-primary" }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.ProductID} , new { @class="btn btn-sm btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

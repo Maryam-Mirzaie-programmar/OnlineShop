@@ -1,0 +1,65 @@
+﻿@model Datalayer.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>مشاهده جزییات</h4>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductShortDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductShortDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductText)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCreateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("ویرایش", "Edit", new { id = Model.ProductID }, new { @class="btn btn-sm btn-warning" }) |
+    @Html.ActionLink("بازگشت به لیست", "Index")
+</p>

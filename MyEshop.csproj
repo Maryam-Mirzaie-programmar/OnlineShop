@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Product_GroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\UserPanel\Controllers\AccountController.cs" />
@@ -190,6 +191,11 @@
     <Content Include="Areas\Admin\Views\Product_Groups\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product_Groups\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product_Groups\ListGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
