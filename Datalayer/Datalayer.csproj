@@ -65,7 +65,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EshopModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MetaDataClasses\ProductMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_GalleryMetaData.cs" />
     <Compile Include="MetaDataClasses\Product_GroupMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_TagsMetaData.cs" />
     <Compile Include="MetaDataClasses\RoleMetaData.cs" />
     <Compile Include="MetaDataClasses\UserMetaData.cs" />
     <Compile Include="Product.cs">
