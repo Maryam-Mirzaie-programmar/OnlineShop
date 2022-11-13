@@ -28,5 +28,9 @@ namespace Datalayer
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product_Groups> Product_Groups { get; set; }
+        public virtual DbSet<Product_Gallery> Product_Gallery { get; set; }
+        public virtual DbSet<Product_SelectedGroups> Product_SelectedGroups { get; set; }
+        public virtual DbSet<Product_Tags> Product_Tags { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }
