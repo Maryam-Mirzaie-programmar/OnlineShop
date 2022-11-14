@@ -12,19 +12,13 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ProductImageName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ProductTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductText)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ProductPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductImageName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProductCreateDate)
@@ -35,27 +29,21 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            <img src="~/Images/ProductImages/Thumb/@item.ProductImageName" alt="@item.ProductTitle _img"/>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.ProductTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductShortDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductText)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductImageName)
+            @item.ProductCreateDate.ToShamsi()
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductCreateDate)
-        </td>
-        <td>
-            @Html.ActionLink("ویرایش", "Edit", new { id=item.ProductID } , new { @class="btn btn-sm btn-warning" }) |
-            @Html.ActionLink("مشاهده", "Details", new { id=item.ProductID } , new { @class="btn btn-sm btn-primary" }) |
-            @Html.ActionLink("حذف", "Delete", new { id=item.ProductID} , new { @class="btn btn-sm btn-danger" })
+            @Html.ActionLink("ویرایش", "Edit", new { id = item.ProductID }, new { @class = "btn btn-sm btn-warning" }) |
+            @Html.ActionLink("مشاهده", "Details", new { id = item.ProductID }, new { @class = "btn btn-sm btn-primary" }) |
+            @Html.ActionLink("حذف", "Delete", new { id = item.ProductID }, new { @class = "btn btn-sm btn-danger" })
         </td>
     </tr>
 }

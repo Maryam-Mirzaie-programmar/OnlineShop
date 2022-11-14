@@ -10,6 +10,7 @@ using Datalayer;
 
 namespace MyEshop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class Product_GroupsController : Controller
     {
         private OnlineShopDBEntities db = new OnlineShopDBEntities();

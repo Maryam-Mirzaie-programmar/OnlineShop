@@ -2,68 +2,144 @@
 
 @{
     ViewBag.Title = "Create";
+    List<Datalayer.Product_Groups> groups = ViewBag.ProductGroups as List<Datalayer.Product_Groups>;
 }
 
-<h4>افزودن</h4>
+<h4> افزودن محصول جدید</h4>
 
-@using (Html.BeginForm()) 
+
+
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductShortDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductShortDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">مشخصات محصول</h3>
+                    </div>
+                    <div class="panel-body">
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductText, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductText, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductText, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.ProductTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ProductTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ProductTitle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.ProductShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ProductShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ProductShortDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductImageName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductImageName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductImageName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.ProductText, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ProductText, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ProductText, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(model => model.ProductCreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductCreateDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProductCreateDate, "", new { @class = "text-danger" })
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.ProductPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ProductPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ProductPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            @Html.Label("کلمات کلیدی", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="text" class = "form-control" name="tags" id="tags" placeholder="لطفا کلمات کلیدی را با کاما جدا کنید"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">تصویر</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <img id="imgPreview" class="thumbnail center-block max-w-100" src="~/Images/ProductImages/default_image.png" />
+
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.ProductImageName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" name="imgUp" id="imgUp" accept="image/*" />
+                                @Html.ValidationMessageFor(model => model.ProductImageName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">دسته بندی</h3>
+                    </div>
+                    <div class="panel-body max-h-100 overflow-auto">
+                        @Html.ValidationMessage("selectedGroups", "", new { @class = "text-danger text-center" })
+                        @if (groups != null)
+                        {
+                            <ul class="list-unstyled">
+                                @foreach (var group in groups.Where(g => g.ParentId == null))
+                                {
+                                    <li>
+                                        <p class="bg-info">
+                                            <input type="checkbox" name="selectedGroups" value="@group.GroupId" />
+                                            <label for="selectedGroups"> @group.GroupTitle</label>
+                                        </p>
+
+
+                                        @if (group.Product_Groups1.Any())
+                                        {
+                                            <p>
+                                                @foreach (var subgroup in group.Product_Groups1)
+                                                {
+                                                    <span class="margin-right-20"> </span>
+                                                    <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId" />
+                                                    <label for="selectedGroups"> @subgroup.GroupTitle</label>
+
+                                                }
+                                            </p>
+                                        }
+
+                                    </li>
+                                }
+
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger text-center">دسته ای برای نمایش یافت نشد.</div>
+                        }
+
+
+
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="form-group mb-3">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="ثبت" class="btn btn-success w-100" />
+                <input type="submit" value="ثبت محصول" class="btn btn-success center-block " />
             </div>
         </div>
     </div>
@@ -72,3 +148,34 @@
 <div>
     @Html.ActionLink("بازگشت به لیست", "Index")
 </div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#preview').attr('src', '');
+            }
+        }
+
+        $("#imgUp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/ckeditor/adapters/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#ProductText').ckeditor();
+        });
+    </script>
+}
