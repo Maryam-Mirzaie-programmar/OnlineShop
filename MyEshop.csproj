@@ -1266,7 +1266,7 @@
     <Compile Include="Utilities\ImageResizer.cs" />
     <Compile Include="Utilities\MyRoleProvider.cs" />
     <Compile Include="Utilities\PartialToStringClass.cs" />
-    <Compile Include="Utilities\PersianConvertor.cs" />
+    <Compile Include="Utilities\PersianCulture.cs" />
     <Compile Include="Utilities\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>

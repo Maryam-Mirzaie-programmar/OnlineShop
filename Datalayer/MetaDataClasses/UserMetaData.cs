@@ -41,6 +41,7 @@ namespace Datalayer
         public bool IsActive { get; set; }
 
         [Display(Name = "تاریخ ثبتنام")]
+        [DisplayFormat(DataFormatString = "{0 : yyyy/MM/dd}")]
         public System.DateTime RegisterDate { get; set; }
     }
 
