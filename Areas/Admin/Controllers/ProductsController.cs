@@ -22,21 +22,6 @@ namespace MyEshop.Areas.Admin.Controllers
             return View(db.Products.ToList());
         }
 
-        // GET: Admin/Products/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
-        }
-
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
@@ -55,7 +40,7 @@ namespace MyEshop.Areas.Admin.Controllers
             {
                 if(selectedGroups == null)
                 {
-                    ModelState.AddModelError("selectedGroups", "لطفا گروه مورد نظر را انتخاب نماید");
+                    ViewBag.SelectedGroupsError = true;
 
                     ViewBag.ProductGroups = db.Product_Groups.ToList();
                     return View(product);
@@ -65,7 +50,7 @@ namespace MyEshop.Areas.Admin.Controllers
                     db.Product_SelectedGroups.Add(new Product_SelectedGroups()
                     {
                         ProductID = product.ProductID,
-                        ProductGroupId = groupId
+                        GroupId = groupId
                     });
                 }
                 product.ProductImageName = "default_image.png";
@@ -114,6 +99,11 @@ namespace MyEshop.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+          
+            ViewBag.Tags = String.Join("، ", product.Product_Tags.Select(t => t.ProductTag));
+            ViewBag.ProductSelectedGrops = product.Product_SelectedGroups.ToList();
+            ViewBag.ProductGroups = db.Product_Groups.ToList();
             return View(product);
         }
 
@@ -122,14 +112,69 @@ namespace MyEshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductTitle,ProductShortDescription,ProductText,ProductPrice,ProductImageName,ProductCreateDate")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductTitle,ProductShortDescription,ProductText,ProductPrice,ProductImageName,ProductCreateDate")] Product product, List<int> selectedGroups, HttpPostedFileBase imgUp, string tags)
         {
             if (ModelState.IsValid)
             {
+                if (selectedGroups == null)
+                {
+                    ViewBag.SelectedGroupsError = true;
+
+                    ViewBag.Tags = tags;
+                    ViewBag.ProductSelectedGrops = selectedGroups;
+                    ViewBag.ProductGroups = db.Product_Groups.ToList();
+                    return View(product);
+                }
+
+
+                db.Product_SelectedGroups.Where(g => g.ProductID == product.ProductID).ToList().ForEach(g => db.Product_SelectedGroups.Remove(g));
+                foreach (var groupId in selectedGroups)
+                {
+                    db.Product_SelectedGroups.Add(new Product_SelectedGroups()
+                    {
+                        ProductID = product.ProductID,
+                        GroupId = groupId
+                    });
+                }
+
+                if (imgUp != null && imgUp.IsImage())
+                {
+                    if(product.ProductImageName != "default_image.png")
+                    {
+                        System.IO.File.Delete(Server.MapPath("/Images/ProductImages/" + product.ProductImageName));
+                        System.IO.File.Delete(Server.MapPath("/Images/ProductImages/Thumb/" + product.ProductImageName));
+                    }
+                    product.ProductImageName = Guid.NewGuid().ToString() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/Images/ProductImages/" + product.ProductImageName));
+                    ImageResizer imageResizer = new ImageResizer();
+                    imageResizer.Resize(Server.MapPath("/Images/ProductImages/" + product.ProductImageName), Server.MapPath("/Images/ProductImages/Thumb/" + product.ProductImageName));
+                }
+
+                db.Product_Tags.Where(t => t.ProductID == product.ProductID).ToList().ForEach(t => db.Product_Tags.Remove(t));
+                if (!String.IsNullOrWhiteSpace(tags))
+                {
+                    foreach (var tag in tags.Split('،'))
+                    {
+                        if (!String.IsNullOrWhiteSpace(tag))
+                        {
+                            db.Product_Tags.Add(new Product_Tags()
+                            {
+                                ProductID = product.ProductID,
+                                ProductTag = tag.Trim()
+                            });
+                        }
+                    }
+                }
+
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+
+            ViewBag.Tags = tags;
+            ViewBag.ProductSelectedGrops = selectedGroups;
+            ViewBag.ProductGroups = db.Product_Groups.ToList();
             return View(product);
         }
 

@@ -1312,7 +1312,6 @@
     <Content Include="Areas\Admin\Views\Product_Groups\ListGroups.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Content\ckeditor\.htaccess" />
