@@ -14,9 +14,10 @@ namespace Datalayer
     
     public partial class Product_Gallery
     {
-        public int ProductGalleryID { get; set; }
+        public int ProductGalleryId { get; set; }
         public int ProductID { get; set; }
-        public string GalleryImageName { get; set; }
+        public string ImageName { get; set; }
+        public string ImageTitle { get; set; }
     
         public virtual Product Product { get; set; }
     }

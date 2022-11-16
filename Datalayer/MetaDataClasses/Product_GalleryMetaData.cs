@@ -10,14 +10,19 @@ namespace Datalayer
     public class Product_GalleryMetaData
     {
         [Key]
-        public int ProductGalleryID { get; set; }
+        public int ProductGalleryId { get; set; }
 
         [Display(Name = "محصول")]
         public int ProductID { get; set; }
 
         [Display(Name = "تصویر")]
         [MaxLength(50)]
-        public string GalleryImageName { get; set; }
+        public string ImageName { get; set; }
+
+        [Display(Name = "عنوان تصویر")]
+        [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
+        [MaxLength(250)]
+        public string ImageTitle { get; set; }
     }
 
 

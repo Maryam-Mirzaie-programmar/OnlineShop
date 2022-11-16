@@ -17,9 +17,9 @@ namespace Datalayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.Product_Gallery = new HashSet<Product_Gallery>();
             this.Product_SelectedGroups = new HashSet<Product_SelectedGroups>();
             this.Product_Tags = new HashSet<Product_Tags>();
+            this.Product_Gallery = new HashSet<Product_Gallery>();
         }
     
         public int ProductID { get; set; }
@@ -31,10 +31,10 @@ namespace Datalayer
         public System.DateTime ProductCreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Gallery> Product_Gallery { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_SelectedGroups> Product_SelectedGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Tags> Product_Tags { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Gallery> Product_Gallery { get; set; }
     }
 }
