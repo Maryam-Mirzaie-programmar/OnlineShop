@@ -1337,6 +1337,7 @@
     <Content Include="Areas\Admin\Views\Features\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Features\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Features\ListFeatures.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\ProductFeatures.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

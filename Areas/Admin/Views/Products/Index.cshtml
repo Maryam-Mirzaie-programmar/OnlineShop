@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.ProductCreateDate)
         </td>
         <td>
-            @Html.ActionLink("ویژگی ها", "Features", new { id = item.ProductID }, new { @class = "btn btn-sm btn-info" })
+            @Html.ActionLink("ویژگی ها", "ProductFeatures", new { id = item.ProductID }, new { @class = "btn btn-sm btn-info" })
             @Html.ActionLink("گالری", "Gallery", new { id = item.ProductID }, new { @class = "btn btn-sm btn-info" })
             @Html.ActionLink("ویرایش", "Edit", new { id = item.ProductID }, new { @class = "btn btn-sm btn-warning" })
             @Html.ActionLink("مشاهده", "Details", new { id = item.ProductID }, new { @class = "btn btn-sm btn-primary" })

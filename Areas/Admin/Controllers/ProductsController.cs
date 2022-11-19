@@ -260,6 +260,55 @@ namespace MyEshop.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Gallery", new { id = gallery.ProductID });
         }
+
+        public ActionResult ProductFeatures(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (!db.Products.Any(p => p.ProductID == id))
+            {
+                return HttpNotFound();
+            }
+            var productFeature = new ProductFeature()
+            {
+                ProductID = id
+            };
+
+
+            ViewBag.FeatureId = new SelectList(db.Features, "FeatureId", "FeatureTitle");
+            ViewBag.Features = db.ProductFeatures.Where(p => p.ProductID == id).ToList();
+            return View(productFeature);
+        }
+
+        [HttpPost]
+        public ActionResult ProductFeatures(ProductFeature feature)
+        {
+            if(ModelState.IsValid)
+            {
+                db.ProductFeatures.Add(feature);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ProductFeatures", new {id = feature.ProductID});
+        }
+
+        public ActionResult DeleteProductFeature(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProductFeature productFeature = db.ProductFeatures.Find(id);
+            if (productFeature == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.ProductFeatures.Remove(productFeature);
+            db.SaveChanges();
+            return RedirectToAction("ProductFeatures", new { id = productFeature.ProductID });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
