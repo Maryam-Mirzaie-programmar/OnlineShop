@@ -19,7 +19,7 @@ namespace Datalayer
         [MaxLength(50)]
         public string ImageName { get; set; }
 
-        [Display(Name = "عنوان تصویر")]
+        [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا فیلد {0} را وارد نمایید")]
         [MaxLength(250)]
         public string ImageTitle { get; set; }

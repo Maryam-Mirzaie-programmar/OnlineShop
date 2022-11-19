@@ -1330,6 +1330,7 @@
     <Content Include="Content\ckeditor\_samples\adobeair\run.bat" />
     <Content Include="Content\ckeditor\_samples\adobeair\run.sh" />
     <Content Include="Content\ckeditor\_samples\assets\output_for_flash.fla" />
+    <Content Include="Areas\Admin\Views\Products\Gallery.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

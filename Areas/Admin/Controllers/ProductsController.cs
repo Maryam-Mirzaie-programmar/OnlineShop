@@ -204,6 +204,62 @@ namespace MyEshop.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult Gallery(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if(! db.Products.Any(p => p.ProductID == id))
+            {
+                return HttpNotFound();
+            }
+
+            var gallery = new Product_Gallery() { ProductID = id};
+            ViewBag.Galleris = db.Product_Gallery.Where(g => g.ProductID == id).ToList();
+            return View(gallery);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Gallery(Product_Gallery gallery, HttpPostedFileBase imgUp)
+        {
+            if(ModelState.IsValid)
+            {
+                if(imgUp != null && imgUp.IsImage())
+                {
+                    gallery.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/Images/ProductImages/" + gallery.ImageName));
+                    ImageResizer imageResizer = new ImageResizer();
+                    imageResizer.Resize(Server.MapPath("/Images/ProductImages/" + gallery.ImageName), Server.MapPath("/Images/ProductImages/Thumb/" + gallery.ImageName));
+
+                    db.Product_Gallery.Add(gallery);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Gallery" , new {id = gallery.ProductID});
+        }
+
+        public ActionResult DeleteGallery(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var gallery = db.Product_Gallery.Find(id);
+            if (gallery == null)
+            {
+                return HttpNotFound();
+            }
+
+            System.IO.File.Delete(Server.MapPath("/Images/ProductImages/" + gallery.ImageName));
+            System.IO.File.Delete(Server.MapPath("/Images/ProductImages/Thumb/" + gallery.ImageName));
+
+            db.Product_Gallery.Remove(gallery);
+            db.SaveChanges();
+            return RedirectToAction("Gallery", new { id = gallery.ProductID });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
