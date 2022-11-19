@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OnlineShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product_Gallery">
           <Key>
             <PropertyRef Name="ProductGalleryId" />
@@ -37,6 +44,15 @@
           <Property Name="ProductTagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ProductTag" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductFeatures">
+          <Key>
+            <PropertyRef Name="ProductFeatureId" />
+          </Key>
+          <Property Name="ProductFeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -131,6 +147,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductFeatures_Features">
+          <End Role="Features" Type="Self.Features" Multiplicity="1" />
+          <End Role="ProductFeatures" Type="Self.ProductFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Features">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="ProductFeatures">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFeatures_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductFeatures" Type="Self.ProductFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductFeatures">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -144,10 +184,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OnlineShopDBModelStoreContainer">
+          <EntitySet Name="Features" EntityType="Self.Features" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Gallery" EntityType="Self.Product_Gallery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Groups" EntityType="Self.Product_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_SelectedGroups" EntityType="Self.Product_SelectedGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Tags" EntityType="Self.Product_Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFeatures" EntityType="Self.ProductFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -170,6 +212,14 @@
           <AssociationSet Name="FK_Product_Tags_Products" Association="Self.FK_Product_Tags_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Product_Tags" EntitySet="Product_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFeatures_Features" Association="Self.FK_ProductFeatures_Features">
+            <End Role="Features" EntitySet="Features" />
+            <End Role="ProductFeatures" EntitySet="ProductFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFeatures_Products" Association="Self.FK_ProductFeatures_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductFeatures" EntitySet="ProductFeatures" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -247,6 +297,16 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_Gallery" EntitySet="Product_Gallery" />
           </AssociationSet>
+          <EntitySet Name="Features" EntityType="OnlineShopDBModel.Feature" />
+          <EntitySet Name="ProductFeatures" EntityType="OnlineShopDBModel.ProductFeature" />
+          <AssociationSet Name="FK_ProductFeatures_Features" Association="OnlineShopDBModel.FK_ProductFeatures_Features">
+            <End Role="Feature" EntitySet="Features" />
+            <End Role="ProductFeature" EntitySet="ProductFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFeatures_Products" Association="OnlineShopDBModel.FK_ProductFeatures_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductFeature" EntitySet="ProductFeatures" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Product_Groups">
           <Key>
@@ -304,6 +364,7 @@
           <NavigationProperty Name="Product_SelectedGroups" Relationship="OnlineShopDBModel.FK_Product_SelectedGroups_Products" FromRole="Product" ToRole="Product_SelectedGroups" />
           <NavigationProperty Name="Product_Tags" Relationship="OnlineShopDBModel.FK_Product_Tags_Products" FromRole="Product" ToRole="Product_Tags" />
           <NavigationProperty Name="Product_Gallery" Relationship="OnlineShopDBModel.FK_Product_Gallery_Products" FromRole="Product" ToRole="Product_Gallery" />
+          <NavigationProperty Name="ProductFeatures" Relationship="OnlineShopDBModel.FK_ProductFeatures_Products" FromRole="Product" ToRole="ProductFeature" />
         </EntityType>
         <Association Name="FK_Product_SelectedGroups_Product_Groups">
           <End Type="OnlineShopDBModel.Product_Groups" Role="Product_Groups" Multiplicity="0..1" />
@@ -359,6 +420,49 @@
               <PropertyRef Name="ProductID" />
             </Principal>
             <Dependent Role="Product_Gallery">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductFeatures" Relationship="OnlineShopDBModel.FK_ProductFeatures_Features" FromRole="Feature" ToRole="ProductFeature" />
+        </EntityType>
+        <EntityType Name="ProductFeature">
+          <Key>
+            <PropertyRef Name="ProductFeatureId" />
+          </Key>
+          <Property Name="ProductFeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureId" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Feature" Relationship="OnlineShopDBModel.FK_ProductFeatures_Features" FromRole="ProductFeature" ToRole="Feature" />
+          <NavigationProperty Name="Product" Relationship="OnlineShopDBModel.FK_ProductFeatures_Products" FromRole="ProductFeature" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ProductFeatures_Features">
+          <End Type="OnlineShopDBModel.Feature" Role="Feature" Multiplicity="1" />
+          <End Type="OnlineShopDBModel.ProductFeature" Role="ProductFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feature">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="ProductFeature">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFeatures_Products">
+          <End Type="OnlineShopDBModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="OnlineShopDBModel.ProductFeature" Role="ProductFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductFeature">
               <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
@@ -439,6 +543,24 @@
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductGalleryId" ColumnName="ProductGalleryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="OnlineShopDBModel.Feature">
+              <MappingFragment StoreEntitySet="Features">
+                <ScalarProperty Name="FeatureTitle" ColumnName="FeatureTitle" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFeatures">
+            <EntityTypeMapping TypeName="OnlineShopDBModel.ProductFeature">
+              <MappingFragment StoreEntitySet="ProductFeatures">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="ProductFeatureId" ColumnName="ProductFeatureId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
