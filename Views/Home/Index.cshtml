@@ -5,4 +5,8 @@
 
 @section slider {
     @Html.Action("Slider")
-    }
+}
+
+@Html.Action("LastProducts", "Product", new {area =""})
+<hr/>
+@Html.Action("MostSellingProducts", "Product" , new {area = ""})

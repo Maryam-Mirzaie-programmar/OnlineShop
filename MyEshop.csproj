@@ -1354,6 +1354,10 @@
     <Content Include="Views\Account\SuccessForgetPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Product\ShowProductGroups.cshtml" />
+    <Content Include="Views\Product\LastProducts.cshtml" />
+    <Content Include="Views\Product\MostSellingProducts.cshtml" />
+    <Content Include="Views\Shared\_ProductBox.cshtml" />
+    <Content Include="Views\Product\SingleProduct.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
