@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     List<Datalayer.Product_Groups> groups = ViewBag.ProductGroups as List<Datalayer.Product_Groups>;
     string tags = ViewBag.Tags;
-    List<Datalayer.Product_SelectedGroups> productSelectedGrops = ViewBag.ProductSelectedGrops as List<Datalayer.Product_SelectedGroups> ?? null;
+    List<Datalayer.Product_SelectedGroups> productSelectedGrops = ViewBag.ProductSelectedGrops as List<Datalayer.Product_SelectedGroups>;
 }
 
 <h4>ویرایش محصول</h4>
@@ -94,7 +94,7 @@
 
 
 
-            @if (ViewBag.SelectedGroupsError != null)
+            @if(ViewBag.SelectedGroupsError != null)
             {
                 <div class="alert alert-danger">
                     لطفا گروه مورد نظر را انتخاب نمایید.
@@ -108,14 +108,21 @@
                 </div>
                 <div class="panel-body max-h-100 overflow-auto">
                     @Html.ValidationMessage("selectedGroups", "", new { @class = "text-danger text-center" })
-                    @if (groups != null)
+                    @if (groups != null && groups.Any())
                     {
                         <ul class="list-unstyled">
                             @foreach (var group in groups.Where(g => g.ParentId == null))
                             {
                                 <li>
                                     <p class="bg-info">
-                                        <input type="checkbox" name="selectedGroups" value="@group.GroupId" @((productSelectedGrops.Any(g => g.GroupId == group.GroupId)) ? "checked" : "") />
+                                        @if (productSelectedGrops != null)
+                                        {
+                                            <input type="checkbox" name="selectedGroups" value="@group.GroupId" @((productSelectedGrops.Any(g => g.GroupId == group.GroupId)) ? "checked" : "") />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="selectedGroups" value="@group.GroupId"/>
+                                        }
                                         <label for="selectedGroups"> @group.GroupTitle</label>
                                     </p>
 
@@ -126,7 +133,14 @@
                                             @foreach (var subgroup in group.Product_Groups1)
                                             {
                                                 <span class="margin-right-20"> </span>
-                                                <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId" @((productSelectedGrops.Any(g => g.GroupId == subgroup.GroupId)) ? "checked" : "") />
+                                                if (productSelectedGrops != null)
+                                                {
+                                                    <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId" @((productSelectedGrops.Any(g => g.GroupId == subgroup.GroupId)) ? "checked" : "") />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId"/>
+                                                }
                                                 <label for="selectedGroups"> @subgroup.GroupTitle</label>
 
                                             }
