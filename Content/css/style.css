@@ -689,7 +689,7 @@ a,span,label,i,p,div{font-weight: normal !important}
 }
 
 .comment-layer{margin-top: 15px; margin-bottom: 15px; border:1px solid #dfdfdf; padding: 15px 10px 0}
-.comment-layer .btn.btn-primary{width: 100%; margin-top: 15px}
+.comment-layer .btn.btn-primary{width: 100%;}
 .comment-layer textarea{min-height: 83px}
 .comment-layer header {position: relative;}
 .comment-layer header h3{  font-size: 18px}
@@ -804,7 +804,7 @@ footer .top-footer header h3{
 }
 
 section form {width: 100%; position: relative;}
-section form input[type="text"],form input[type="email"],form input[type="password"],form select,form textarea{display: block; text-align: right; font-size: 13px; width: 60%; margin-bottom: 10px; line-height: 35px; padding: 0 15px; border:1px solid #E4E4E4; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; color: #575757}
+section form input[type="text"],form input[type="email"],form input[type="password"],form select,form textarea{display: block; text-align: right; font-size: 13px; margin-bottom: 10px; line-height: 35px; padding: 0 15px; border:1px solid #E4E4E4; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; color: #575757}
 section form select option{padding: 2px 15px}
 section form textarea{height: 150px; resize:none;}
 section form input[type="submit"]{padding: 0 10px; background-color: #58b62a; border:0; color: #fff; line-height: 35px; margin: 15px 0; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;}

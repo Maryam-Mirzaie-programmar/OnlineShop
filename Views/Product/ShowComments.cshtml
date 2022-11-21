@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Datalayer.Product_Comments>
+
+@if (Model.Any())
+{
+    <ul class="comment-list">
+        @foreach (var comment in Model.Where(c => c.ParentId == null))
+        {
+            <li style="border: 1px solid #e5e5e5; margin: 8px; padding: 15px;">
+                <a href="" class="reply-button">پاسخ</a>
+
+                <img src="/Content/img/avatar.jpg" width="65">
+                <div>
+                    <p class="small">ارسال شده از : @comment.Name در تاریخ : @comment.CreateDate.ToString("yyyy/MM/dd") </p>
+                    <p style="padding-top: 10px;">
+                        @comment.Comment
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+                @if (Model.Any(c => c.ParentId == comment.CommentId))
+                {
+                    <div style="margin-right: 20px;">
+                        <ul>
+                            @foreach (var item in Model.Where(c => c.ParentId == comment.CommentId))
+                            {
+                                <li>
+
+                                    <img src="/Content/img/avatar.jpg" width="65">
+                                    <div>
+                                        <p class="small">ارسال شده از : @item.Name در تاریخ : @item.CreateDate.ToString("yyyy/MM/dd") </p>
+                                        <p style="padding-top: 10px;">
+                                            @item.Comment
+                                        </p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+
+            </li>
+
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-info text-center margin-top-20">
+        شما اولین نفری باشید که نظر می دهید
+    </div>
+}

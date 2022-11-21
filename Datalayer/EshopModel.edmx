@@ -21,7 +21,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Website" Type="nvarchar" MaxLength="350" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="800" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="800" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="ParentId" Type="int" />
         </EntityType>
@@ -532,7 +532,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
-          <Property Name="Comment" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="800" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ParentId" Type="Int32" />
           <NavigationProperty Name="Product_Comments1" Relationship="OnlineShopDBModel.FK_Product_Comments_Product_Comments1" FromRole="Product_Comments" ToRole="Product_Comments1" />

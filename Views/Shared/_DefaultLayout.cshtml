@@ -148,7 +148,7 @@
             </section>
             <!-- End compare -->
             <!-- Category -->
-            @Html.Action("ShowProductGroups" , "Product" , new {area = ""})
+            @Html.Action("ShowProductGroups", "Product", new { area = "" })
             <!-- End Category -->
             <!-- Category -->
             <!-- End Category -->
@@ -237,6 +237,9 @@
     <script src="/Content/js/script.js"></script>
     <script src="~/Content/js/jquery.validate.min.js"></script>
     <script src="~/Content/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/jquery.unobtrusive-ajax.min.js"></script>
+    @RenderSection("Scripts", false)
+
 </body>
 </html>
 

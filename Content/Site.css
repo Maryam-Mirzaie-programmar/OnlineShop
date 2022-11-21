@@ -39,3 +39,7 @@ textarea {
 .img-box {
     height: 120px;
 }
+
+.field-validation-valid{
+    display : none;
+}

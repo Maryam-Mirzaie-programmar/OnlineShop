@@ -1,0 +1,40 @@
+﻿@model Datalayer.Product_Comments
+
+@using (Ajax.BeginForm("CreateComment", "Product", FormMethod.Post, ajaxOptions: new AjaxOptions
+{
+    OnSuccess = "successComment",
+    UpdateTargetId = "commentsList"
+}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProductID)
+    @Html.HiddenFor(model => model.ParentId)
+    <div class="col-md-5">
+        <div class="form-group">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "نام و نام خانوادگی" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control w-100", placeholder = "ایمیل" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control", placeholder = "وب سایت" } })
+            @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="form-group">
+            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control", placeholder = "متن دیدگاه" } })
+            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="ثبت دیدگاه ارزشمند شما" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+}

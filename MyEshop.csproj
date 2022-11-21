@@ -1358,6 +1358,8 @@
     <Content Include="Views\Product\MostSellingProducts.cshtml" />
     <Content Include="Views\Shared\_ProductBox.cshtml" />
     <Content Include="Views\Product\SingleProduct.cshtml" />
+    <Content Include="Views\Product\ShowComments.cshtml" />
+    <Content Include="Views\Product\CreateComment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

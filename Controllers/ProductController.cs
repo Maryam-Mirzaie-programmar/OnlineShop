@@ -58,5 +58,57 @@ namespace MyEshop.Controllers
             ViewBag.ProductFeatures = features;
             return View(product);
         }
+
+
+        [ChildActionOnly]
+        public ActionResult ShowComments(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (! db.Products.Any(p => p.ProductID == id))
+            {
+                return HttpNotFound();
+            }
+            var comments = db.Product_Comments.Where(p => p.ProductID == id);
+            return PartialView(comments);
+        }
+
+        public ActionResult CreateComment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (!db.Products.Any(p => p.ProductID == id))
+            {
+                return HttpNotFound();
+            }
+            return PartialView(new Product_Comments() { ProductID = id.Value});
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "CommentId, ProductID, Name, Email, Website, Comment, ParentId")] Product_Comments productComment)
+        {
+            if (ModelState.IsValid)
+            {
+                productComment.CreateDate = DateTime.Now;
+                db.Product_Comments.Add(productComment);
+                db.SaveChanges();
+                return PartialView("ShowComments", db.Product_Comments.Where(p => p.ProductID == productComment.ProductID));
+            }
+            return PartialView(productComment);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
