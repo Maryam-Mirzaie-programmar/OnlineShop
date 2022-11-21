@@ -34,5 +34,6 @@ namespace Datalayer
         public virtual DbSet<Product_Gallery> Product_Gallery { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
+        public virtual DbSet<Product_Comments> Product_Comments { get; set; }
     }
 }

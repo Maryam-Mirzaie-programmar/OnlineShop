@@ -28,16 +28,16 @@
 
                 @if (Model.Product_Gallery.Any())
                 {
-    <div class="thumbnails-image">
-        <div class="row">
-            @foreach (var gallery in Model.Product_Gallery)
-            {
-                <div class="col-md-3 col-sm-3 col-xs-4 border-radius"><img class="border-radius" src="~/Images/ProductImages/Thumb/@gallery.ImageName" alt="@gallery.ImageTitle"></div>
-            }
-            <div class="clearfix"></div>
-        </div>
-    </div>
-}
+                    <div class="thumbnails-image">
+                        <div class="row">
+                            @foreach (var gallery in Model.Product_Gallery)
+                            {
+                                <div class="col-md-3 col-sm-3 col-xs-4 border-radius"><img class="border-radius" src="~/Images/ProductImages/Thumb/@gallery.ImageName" alt="@gallery.ImageTitle"></div>
+                            }
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                }
 
 
             </div>
@@ -70,7 +70,7 @@
                         {
                             <li>
                                 <span class="text-primary">@feature.FeatureTitle :</span>
-                                 @String.Join(" ، ", feature.Values)
+                                @String.Join(" ، ", feature.Values)
                             </li>
                         }
                     </ul>
@@ -178,15 +178,17 @@
         </div>
     </div>
 
-    <section class="border-radius tags-layer">
-        @if (Model.Product_Tags.Any())
-        {
-            foreach (var tag in Model.Product_Tags)
+
+    @if (Model.Product_Tags.Any())
+    {
+        <section class="border-radius tags-layer">
+            @foreach (var tag in Model.Product_Tags)
             {
                 <a href=""> @tag.ProductTag</a>
             }
-        }
+        </section>
+     }
 
 
-    </section>
-</div>
+
+    </div>

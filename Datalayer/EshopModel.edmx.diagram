@@ -18,10 +18,13 @@
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Tags_Products" />
         <EntityTypeShape EntityType="OnlineShopDBModel.Product_Gallery" Width="2.125" PointX="10.625" PointY="5.875" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Gallery_Products" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Feature" Width="1.5" PointX="8.375" PointY="10.125" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.ProductFeature" Width="1.5" PointX="10.625" PointY="8.875" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Feature" Width="1.5" PointX="2.875" PointY="9.625" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.ProductFeature" Width="1.5" PointX="6.25" PointY="9.375" />
         <AssociationConnector Association="OnlineShopDBModel.FK_ProductFeatures_Features" />
         <AssociationConnector Association="OnlineShopDBModel.FK_ProductFeatures_Products" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Comments" Width="1.5" PointX="10.75" PointY="9" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_Product_Comments_Product_Comments1" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_Product_Comments_Products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

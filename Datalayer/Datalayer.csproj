@@ -92,6 +92,7 @@
     <Compile Include="MetaDataClasses\FeatureMetaData.cs" />
     <Compile Include="MetaDataClasses\ProductFeatureMetaData.cs" />
     <Compile Include="MetaDataClasses\ProductMetaData.cs" />
+    <Compile Include="MetaDataClasses\Product_CommentsMetaData.cs" />
     <Compile Include="MetaDataClasses\Product_GalleryMetaData.cs" />
     <Compile Include="MetaDataClasses\Product_GroupMetaData.cs" />
     <Compile Include="MetaDataClasses\Product_TagsMetaData.cs" />
@@ -101,6 +102,9 @@
       <DependentUpon>EshopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductFeature.cs">
+      <DependentUpon>EshopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Comments.cs">
       <DependentUpon>EshopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Product_Gallery.cs">
