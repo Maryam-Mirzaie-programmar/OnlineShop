@@ -98,7 +98,7 @@
         <section class="border-radius tags-layer">
             @foreach (var tag in Model.Product_Tags)
             {
-                <a href=""> @tag.ProductTag</a>
+                <a href="/Search?q=@tag.ProductTag"> @tag.ProductTag</a>
             }
         </section>
     }
