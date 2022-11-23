@@ -3,10 +3,10 @@
 @if (Model.Any())
 {
     <ul class="comment-list">
-        @foreach (var comment in Model.Where(c => c.ParentId == null))
+        @foreach (var comment in Model.Where(c => c.ParentId == null).OrderByDescending(c => c.CreateDate))
         {
             <li style="border: 1px solid #e5e5e5; margin: 8px; padding: 15px;">
-                <a href="" class="reply-button">پاسخ</a>
+                <a onclick="ReplyComment(@comment.CommentId)" class="reply-button">پاسخ</a>
 
                 <img src="/Content/img/avatar.jpg" width="65">
                 <div>
@@ -20,7 +20,7 @@
                 {
                     <div style="margin-right: 20px;">
                         <ul>
-                            @foreach (var item in Model.Where(c => c.ParentId == comment.CommentId))
+                            @foreach (var item in Model.Where(c => c.ParentId == comment.CommentId).OrderByDescending(c => c.CreateDate))
                             {
                                 <li>
 

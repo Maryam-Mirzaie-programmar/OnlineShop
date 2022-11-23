@@ -81,7 +81,8 @@
             <!-- Comment -->
             <div id="comments" class="tab-pane fade">
                 <div class="comment-layer">
-                    @Html.Action("CreateComment", new { id = Model.ProductID })
+                        @Html.Action("CreateComment", new { id = Model.ProductID })
+
                     <div id="commentsList">
                         @Html.Action("ShowComments", "Product", new { area = "", id = Model.ProductID })
                     </div>
@@ -111,7 +112,17 @@
             $("#Name").val("");
             $("#Email").val("");
             $("#Website").val("");
+            $("#Comment").val("");
             $("#Comment").html("");
+
+            $("#ParentId").val("");
+        }
+
+        function ReplyComment(commentId) {
+            $("#ParentId").val(commentId);
+
+            $("html,body").animate({ scrollTop: $("#comments").offset().top }, 'slow');
+
         }
 
     </script>
