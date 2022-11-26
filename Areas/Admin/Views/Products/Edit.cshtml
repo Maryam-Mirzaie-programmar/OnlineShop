@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     List<Datalayer.Product_Groups> groups = ViewBag.ProductGroups as List<Datalayer.Product_Groups>;
     string tags = ViewBag.Tags;
-    List<Datalayer.Product_SelectedGroups> productSelectedGrops = ViewBag.ProductSelectedGrops as List<Datalayer.Product_SelectedGroups>;
+    List<Datalayer.Product_SelectedGroups> productSelectedGrops = ViewBag.ProductSelectedGrops ?? new List<Datalayer.Product_SelectedGroups>();
 }
 
 <h4>ویرایش محصول</h4>
@@ -115,14 +115,7 @@
                             {
                                 <li>
                                     <p class="bg-info">
-                                        @if (productSelectedGrops != null)
-                                        {
-                                            <input type="checkbox" name="selectedGroups" value="@group.GroupId" @((productSelectedGrops.Any(g => g.GroupId == group.GroupId)) ? "checked" : "") />
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" name="selectedGroups" value="@group.GroupId"/>
-                                        }
+                                         <input type="checkbox" name="selectedGroups" value="@group.GroupId" @((productSelectedGrops.Any(g => g.GroupId == group.GroupId)) ? "checked" : "") />
                                         <label for="selectedGroups"> @group.GroupTitle</label>
                                     </p>
 
@@ -133,14 +126,7 @@
                                             @foreach (var subgroup in group.Product_Groups1)
                                             {
                                                 <span class="margin-right-20"> </span>
-                                                if (productSelectedGrops != null)
-                                                {
-                                                    <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId" @((productSelectedGrops.Any(g => g.GroupId == subgroup.GroupId)) ? "checked" : "") />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId"/>
-                                                }
+                                                <input type="checkbox" name="selectedGroups" value="@subgroup.GroupId" @((productSelectedGrops.Any(g => g.GroupId == subgroup.GroupId)) ? "checked" : "") />
                                                 <label for="selectedGroups"> @subgroup.GroupTitle</label>
 
                                             }

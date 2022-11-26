@@ -19,8 +19,9 @@ namespace MyEshop.Controllers
             {
                 q = q.ToLower().Trim();
                 products.AddRange(db.Products.Where(p => p.ProductTitle.ToLower().Contains(q)));
-                products.AddRange(db.Products.Where(p => p.ProductShortDescription.ToLower().Contains(q)));
                 products.AddRange(db.Product_Tags.Where(t => t.ProductTag == q).Select(t => t.Product));
+                products.AddRange(db.Products.Where(p => p.ProductShortDescription.ToLower().Contains(q)));
+                products.AddRange(db.Products.Where(p => p.ProductText.ToLower().Contains(q)));
             }
             return View(products.Distinct());
         }

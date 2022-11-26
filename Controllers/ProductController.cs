@@ -102,6 +102,47 @@ namespace MyEshop.Controllers
             return PartialView(productComment);
         }
 
+        [Route("Archieve")]
+        public ActionResult Archieve(int pageId=1, string title="", int minPrice=0, int maxPrice=0 , List<int> selectedGroups = null)
+        {
+            List<Product> products = new List<Product>();
+            if(selectedGroups != null)
+            {
+               foreach(var groupId in selectedGroups)
+                {
+                    products.AddRange(db.Product_SelectedGroups.Where(g => g.GroupId == groupId).Select(g=> g.Product).ToList());
+                }
+               products = products.Distinct().ToList();
+            }
+            else
+            {
+                products = db.Products.ToList();
+            }
+            if(! String.IsNullOrWhiteSpace(title))
+            {
+                title = title.Trim().ToLower();
+                products = products.Where(p => p.ProductTitle.ToLower().Contains(title)).ToList();
+            }
+            if(minPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice >= minPrice).ToList();
+            }
+            if (maxPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice <= maxPrice).ToList();
+            }
+            ViewBag.selectedGroupsList = selectedGroups;
+            ViewBag.PageId = pageId;
+            ViewBag.groups = db.Product_Groups.ToList();
+
+            //Paging
+            int take = 3;
+            int skip = (pageId - 1) * take;
+            // ViewBag.PagesCount = (int) Math.Ceiling(products.Count / take);
+            double pegeCount = 1.0 * products.Count / take;
+            ViewBag.PagesCount = Math.Ceiling(pegeCount);
+            return View(products.OrderByDescending(p => p.ProductCreateDate).Skip(skip).Take(take));
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

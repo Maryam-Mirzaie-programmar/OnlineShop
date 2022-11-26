@@ -19,7 +19,6 @@ textarea {
 .max-w-100{
     max-width : 100%!important;
 }
-
 .max-h-100{
     max-height : 100%;
 }
@@ -36,9 +35,7 @@ textarea {
     margin-top: 25px;
 }
 
-.img-box {
-    height: 120px;
-}
+
 
 .field-validation-valid{
     display : none;
