@@ -26,7 +26,7 @@
                 <div class="clientarea">
                     <ul>
                         @Html.Partial("_LoggedInUser")
-                        <li><a href=""><i class="fa fa-shopping-bag"></i> سبد خرید <span>10</span></a></li>
+                        <li><a href=""><i class="fa fa-shopping-bag"></i> سبد خرید <span id="shopItemsCount"></span></a></li>
                     </ul>
                 </div>
                 <!-- End Clientarea and Basket -->
@@ -94,32 +94,9 @@
         <aside class="col-md-3 col-sm-4 right-side-content">
             @RenderSection("Filters" , false)
             <!-- Basket -->
-            <section class="border-radius basket-side">
-                <header><h3> سبد خرید شما  </h3></header>
-                <article>
-                    <ul>
-                        <li>
-                            <img class="border-radius" src="/Content/img/1.jpg">
-                            <div class="left-basket">
-                                <a href="">محصول شماره یک <span class="border-radius"> 2 </span></a>
-                            </div>
-                        </li>
-                        <li>
-                            <img class="border-radius" src="/Content/img/1.jpg">
-                            <div class="left-basket">
-                                <a href="">محصول شماره یک <span class="border-radius"> 2 </span></a>
-                            </div>
-                        </li>
-                        <li>
-                            <img class="border-radius" src="/Content/img/1.jpg">
-                            <div class="left-basket">
-                                <a href="">محصول شماره یک <span class="border-radius"> 2 </span></a>
-                            </div>
-                        </li>
-                    </ul>
-                    <a href="" class="show-basket-button border-radius">مشاهده سبد خرید</a>
-                </article>
-            </section>
+            <div id="showBasketSide">
+            @Html.Action("ShowBasketSide","Shop", new {area =""})
+             </div>
             <!-- End Basket -->
             <!-- compare -->
             <section class="border-radius compare-side">
@@ -235,7 +212,29 @@
     <script src="~/Content/js/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/js/jquery.unobtrusive-ajax.min.js"></script>
     @RenderSection("Scripts", false)
+    <script>
 
+        $(function () {
+            ShopItemsCount();
+        });
+
+        function ShopItemsCount() {
+            $.get("/Shop/ShopItemsCount", function (res) {
+                $("#shopItemsCount").html(res);
+            });
+        }
+
+        function AddToCart(id) {
+            $.get("/Shop/AddToCart/" + id, function (res) {
+                $("#shopItemsCount").html(res);
+                UpdateBasketSide();
+            });
+        }
+
+        function UpdateBasketSide() {
+            $("#showBasketSide").load("/Shop/ShowBasketSide").fadeOut(100).fadeIn(100);
+        }
+    </script>
 </body>
 </html>
 
