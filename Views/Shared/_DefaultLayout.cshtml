@@ -232,8 +232,21 @@
         }
 
         function UpdateBasketSide() {
-            $("#showBasketSide").load("/Shop/ShowBasketSide").fadeOut(100).fadeIn(100);
+            $("#showBasketSide").load("/Shop/ShowBasketSide");
         }
+
+        function ChangeCount(id, count) {
+            $.ajax({
+                url: "/Shop/ChangeCount/" + id,
+                type: "Get",
+                data: {count:count}
+            }).done(function (res) {
+                $("#ordersFactor").html(res);
+                ShopItemsCount();
+                UpdateBasketSide();
+            });
+        }
+
     </script>
 </body>
 </html>
