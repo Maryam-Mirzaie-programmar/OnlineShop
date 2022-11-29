@@ -5,26 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="63e06e96c6b747eba12cbdc19fc50afb" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineShopDBModel.Role" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Role" Width="1.5" PointX="1.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.User" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Users_Roles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Groups" Width="1.5" PointX="6.875" PointY="1.625" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Groups" Width="1.5" PointX="11.5" PointY="4" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Groups_Product_Groups" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product_SelectedGroups" Width="1.5" PointX="10.5" PointY="2.875" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Tags" Width="1.5" PointX="4" PointY="7.25" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product" Width="1.5" PointX="8.375" PointY="5.375" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_SelectedGroups" Width="1.5" PointX="9.625" PointY="4" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Tags" Width="1.5" PointX="1.375" PointY="7.25" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product" Width="1.5" PointX="6.375" PointY="8.25" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_SelectedGroups_Product_Groups" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_SelectedGroups_Products" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Tags_Products" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Gallery" Width="2.125" PointX="10.625" PointY="5.875" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Gallery" Width="2.125" PointX="10.375" PointY="8" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Gallery_Products" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Feature" Width="1.5" PointX="2.875" PointY="9.625" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.ProductFeature" Width="1.5" PointX="6.25" PointY="9.375" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Feature" Width="1.5" PointX="1.5" PointY="10.125" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.ProductFeature" Width="1.5" PointX="3.25" PointY="10.125" />
         <AssociationConnector Association="OnlineShopDBModel.FK_ProductFeatures_Features" />
         <AssociationConnector Association="OnlineShopDBModel.FK_ProductFeatures_Products" />
-        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Comments" Width="1.5" PointX="10.75" PointY="9" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Product_Comments" Width="1.5" PointX="8.625" PointY="10.75" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Comments_Product_Comments1" />
         <AssociationConnector Association="OnlineShopDBModel.FK_Product_Comments_Products" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.OrderDetail" Width="1.5" PointX="4.75" PointY="4.125" />
+        <EntityTypeShape EntityType="OnlineShopDBModel.Order" Width="1.5" PointX="2.875" PointY="4.125" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_OrderDetails_Products" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_Orders_Users" />
+        <AssociationConnector Association="OnlineShopDBModel.FK_OrderDetails_Orders" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

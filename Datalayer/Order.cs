@@ -12,25 +12,21 @@ namespace Datalayer
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Order()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
+        public int OrderId { get; set; }
         public int UserId { get; set; }
-        public int RoleId { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string ActrivationCode { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime RegisterDate { get; set; }
+        public System.DateTime Date { get; set; }
+        public bool IsFinally { get; set; }
     
-        public virtual Role Role { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
