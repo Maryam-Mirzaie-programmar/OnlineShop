@@ -51,6 +51,8 @@
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,6 +97,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\Zarinpal\configuration91.svcinfo" />
+    <None Include="Connected Services\Zarinpal\configuration.svcinfo" />
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.GetUnverifiedTransactionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.PaymentRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.PaymentRequestWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.PaymentVerificationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.PaymentVerificationWithExtraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\Zarinpal\MyEshop.Zarinpal.RefreshAuthorityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\Zarinpal\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\ckeditor\adapters\jquery.js" />
     <Content Include="Content\ckeditor\build-config.js" />
     <Content Include="Content\ckeditor\CHANGES.html" />
@@ -1255,6 +1281,11 @@
     <Compile Include="Areas\UserPanel\Controllers\AccountController.cs" />
     <Compile Include="Areas\UserPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\UserPanel\UserPanelAreaRegistration.cs" />
+    <Compile Include="Connected Services\Zarinpal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageEmailsController.cs" />
@@ -1340,6 +1371,7 @@
     <Content Include="Areas\Admin\Views\Features\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Features\ListFeatures.cshtml" />
     <Content Include="Areas\Admin\Views\Products\ProductFeatures.cshtml" />
+    <None Include="Connected Services\Zarinpal\PaymentGatewayImplementationService.wsdl" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1367,6 +1399,8 @@
     <Content Include="Views\Shop\ShowBasketSide.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Shop\Orders.cshtml" />
+    <Content Include="Views\Shop\Payment.cshtml" />
+    <Content Include="Views\Shop\Verify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1386,6 +1420,12 @@
       <Project>{1548b928-40ef-4fc3-b57f-23fc4f00fc6f}</Project>
       <Name>Datalayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\Zarinpal\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

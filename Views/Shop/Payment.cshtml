@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+}
+
+@if(ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center">
+                    <p>
+                        متاسفانه اتصال به درگاه بانک امکان پذیر نمی باشد
+                    </p>
+                    کد خطا:
+                    <p>@ViewBag.Error</p>
+                </div>
+            }
+

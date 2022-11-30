@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Verify";
+}
+
+@if (ViewBag.InvalidInput != null)
+{
+    <div class="alert alert-danger text-center">
+        داده های وارد شده معتبر نمی باشد
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger text-center">
+        <p>متاسفانه خطایی رخ داده است. کد خطا به صورت زیر می باشد:</p>
+        <p> Authority: @ViewBag.Authority</p>
+        <p> Status: @ViewBag.Status</p>
+    </div>
+}
+@if (ViewBag.Success == true)
+{
+    <script>
+        $(function () {
+            ShopItemsCount();
+            UpdateBasketSide();
+        });
+    </script>
+    <div class="alert alert-success text-center">
+        <p>عملیات با موفقیت انجام شد</p>
+        <p>کد رهگیری: @ViewBag.RefID</p>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger text-center">
+        <p>متاسفانه خطایی رخ داده است. :</p>
+        <p> کد خطا : @ViewBag.Status</p>
+    </div>
+}
+
+
+<h3 class="text-center"><a href="/">بازگشت به صفحه اصلی</a></h3>
