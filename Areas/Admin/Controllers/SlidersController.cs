@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Datalayer;
+using System.IO;
 
 namespace MyEshop.Areas.Admin.Controllers
 {
@@ -46,15 +47,25 @@ namespace MyEshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SliderId,Title,ImageName,StartDate,EndDate,IsActive")] Slider slider)
+        public ActionResult Create([Bind(Include = "SliderId,Title,ImageName,StartDate,EndDate,IsActive,Url")] Slider slider , HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
+                if(imgUp == null || !imgUp.IsImage())
+                {
+                    ModelState.AddModelError("ImageName", "لطفا یک تصویر انتخاب کنید");
+                    return View(slider);
+                }
+
+                slider.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imgUp.FileName);
+                imgUp.SaveAs(Server.MapPath("/Images/SliderImages/" + slider.ImageName));
+                ImageResizer img = new ImageResizer();
+                img.Resize(Server.MapPath("/Images/SliderImages/" + slider.ImageName), Server.MapPath("/Images/SliderImages/Thumb/" + slider.ImageName));
+
                 db.Sliders.Add(slider);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(slider);
         }
 
@@ -78,13 +89,23 @@ namespace MyEshop.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SliderId,Title,ImageName,StartDate,EndDate,IsActive")] Slider slider)
+        public ActionResult Edit([Bind(Include = "SliderId,Title,ImageName,StartDate,EndDate,IsActive,Url")] Slider slider, HttpPostedFileBase imgUp)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(slider).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (imgUp != null && imgUp.IsImage())
+                {
+                    System.IO.File.Delete(Server.MapPath("/Images/SliderImages/" + slider.ImageName));
+                    System.IO.File.Delete(Server.MapPath("/Images/SliderImages/Thumb/" + slider.ImageName));
+
+                    slider.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imgUp.FileName);
+                    imgUp.SaveAs(Server.MapPath("/Images/SliderImages/" + slider.ImageName));
+                    ImageResizer img = new ImageResizer();
+                    img.Resize(Server.MapPath("/Images/SliderImages/" + slider.ImageName), Server.MapPath("/Images/SliderImages/Thumb/" + slider.ImageName));
+                }
+                    db.Entry(slider).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
             }
             return View(slider);
         }
@@ -110,6 +131,8 @@ namespace MyEshop.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Slider slider = db.Sliders.Find(id);
+            System.IO.File.Delete(Server.MapPath("/Images/SliderImages/" + slider.ImageName));
+            System.IO.File.Delete(Server.MapPath("/Images/SliderImages/Thumb/" + slider.ImageName));
             db.Sliders.Remove(slider);
             db.SaveChanges();
             return RedirectToAction("Index");

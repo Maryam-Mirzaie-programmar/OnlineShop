@@ -1266,6 +1266,7 @@
     <Content Include="Content\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\kendo.all.min.js" />
     <Content Include="Content\js\modernizr.js" />
     <Content Include="Content\js\owl.carousel.js" />
     <Content Include="Content\js\script.js" />
@@ -1419,6 +1420,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\UserPanel\Data\" />
     <Folder Include="Images\ProductImages\Thumb\" />
+    <Folder Include="Images\SliderImages\Thumb\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

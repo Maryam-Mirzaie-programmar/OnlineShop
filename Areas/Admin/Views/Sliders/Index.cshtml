@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.ImageName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageName)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartDate)
@@ -32,10 +32,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            <img src="~/Images/SliderImages/Thumb/@item.ImageName" alt="@item.Title"/>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImageName)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.StartDate)
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
-            @Html.ActionLink("ویرایش", "Edit", new { id=item.SliderId } , new { @class="btn btn-sm btn-warning" }) |
-            @Html.ActionLink("مشاهده", "Details", new { id=item.SliderId } , new { @class="btn btn-sm btn-primary" }) |
-            @Html.ActionLink("حذف", "Delete", new { id=item.SliderId} , new { @class="btn btn-sm btn-danger" })
+            @Html.ActionLink("ویرایش", "Edit", new { id = item.SliderId }, new { @class = "btn btn-sm btn-warning" }) |
+            @Html.ActionLink("مشاهده", "Details", new { id = item.SliderId }, new { @class = "btn btn-sm btn-primary" }) |
+            @Html.ActionLink("حذف", "Delete", new { id = item.SliderId }, new { @class = "btn btn-sm btn-danger" })
         </td>
     </tr>
 }

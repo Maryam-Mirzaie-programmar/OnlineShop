@@ -116,6 +116,7 @@
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="450" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -730,6 +731,7 @@
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -866,6 +868,7 @@
           <EntitySetMapping Name="Sliders">
             <EntityTypeMapping TypeName="OnlineShopDBModel.Slider">
               <MappingFragment StoreEntitySet="Slider">
+                <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />

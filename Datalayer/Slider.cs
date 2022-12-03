@@ -20,5 +20,6 @@ namespace Datalayer
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
         public bool IsActive { get; set; }
+        public string Url { get; set; }
     }
 }
