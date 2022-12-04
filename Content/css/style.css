@@ -32,8 +32,10 @@ body {
     height: 120px;
 }
 
+.cursor-pointer{
+    cursor : pointer;
+}
 /* filters*/
-
 .filter-side article {
     padding: 5px;
 }

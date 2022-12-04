@@ -91,31 +91,9 @@
     <!-- End slider -->
 
     <div class="container margin-top-25">
-        <aside class="col-md-3 col-sm-4 right-side-content">
-            @RenderSection("Filters" , false)
-
-            <!-- Basket -->
-            <div id="showBasketSide">
-            @Html.Action("ShowBasketSide","Shop", new {area =""})
-             </div>
-            <!-- End Basket -->
-
-            <!-- compare -->
-            <div id="showCompareAside">
-                @Html.Action("CompareAside", "Compare", new { area = "" })
-            </div>
-            <!-- End compare -->
-
-            <!-- Category -->
-            @Html.Action("ShowProductGroups", "Product", new { area = "" })
-            <!-- End Category -->
-
-        </aside>
-        <div class="col-md-9 col-sm-8 left-side-content">
 
             @RenderBody()
 
-        </div>
         <div class="clearfix"></div>
     </div>
 
@@ -208,56 +186,6 @@
                 $("#shopItemsCount").html(res);
             });
         }
-
-        function AddToCart(id) {
-            $.get("/Shop/AddToCart/" + id, function (res) {
-                $("#shopItemsCount").html(res);
-                UpdateBasketSide();
-            });
-        }
-
-        function UpdateBasketSide() {
-            $("#showBasketSide").load("/Shop/ShowBasketSide");
-        }
-
-        function ChangeCount(id, count) {
-            $.ajax({
-                url: "/Shop/ChangeCount/" + id,
-                type: "Get",
-                data: {count:count}
-            }).done(function (res) {
-                $("#ordersFactor").html(res);
-                ShopItemsCount();
-                UpdateBasketSide();
-            });
-        }
-
-
-        function AddCompare(id) {
-            $.get("/Compare/AddToCompare/" + id, function (res) {
-                $("#showCompareAside").html(res);
-            });
-        }
-
-        function RemoveCompare(id) {
-            $.get("/Compare/RemoveFromCompare/" + id, function (res) {
-                $("#compare_" + id).prop('checked', false);
-                $("#showCompareAside").html(res);
-            });
-        }
-
-        function CheckCompareStatus(id) {
-            var checkbox = $("#compare_" + id);
-            if (checkbox.is(':checked'))
-            {
-                AddCompare(id);
-            }
-            else 
-            {
-                RemoveCompare(id);
-            }
-        }
-
 
     </script>
 </body>

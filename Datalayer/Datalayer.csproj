@@ -137,6 +137,7 @@
       <DependentUpon>EshopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\CompareViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ShopCartViewModel.cs" />
   </ItemGroup>

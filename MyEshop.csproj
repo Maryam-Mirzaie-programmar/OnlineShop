@@ -1294,6 +1294,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompareController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageEmailsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -1408,6 +1409,9 @@
     <Content Include="Views\Shop\Orders.cshtml" />
     <Content Include="Views\Shop\Payment.cshtml" />
     <Content Include="Views\Shop\Verify.cshtml" />
+    <Content Include="Views\Compare\Index.cshtml" />
+    <Content Include="Views\Compare\CompareAside.cshtml" />
+    <Content Include="Views\Shared\_LayoutWithoutSidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

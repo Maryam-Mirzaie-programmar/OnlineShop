@@ -15,7 +15,7 @@
             </a>
         </h2>
 
-        <h6>افزودن به لیست مقایسه <input type="checkbox"></h6>
+        <h6>افزودن به لیست مقایسه <input type="checkbox" id="compare_@Model.ProductID" onchange="CheckCompareStatus(@Model.ProductID)"></h6>
         <span class="col-md-9 col-sm-9 col-xs-9 price-layer">
             <label>@Model.ProductPrice.ToString("#,0")  تومان</label>
         </span>
@@ -24,3 +24,5 @@
         </a>
     </div>
 </div>
+
+
